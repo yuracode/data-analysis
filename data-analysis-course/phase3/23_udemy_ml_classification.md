@@ -8,6 +8,42 @@
 ## 前回の振り返り
 - 相関・回帰分析の統計的側面とVIFによる多重共線性診断を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic').copy()
+df['family_size'] = df['sibsp'] + df['parch'] + 1
+
+feature_cols = ['age', 'fare', 'family_size', 'sex', 'embarked', 'pclass']
+X = df[feature_cols]
+y = df['survived']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
+
+num_cols = ['age', 'fare', 'family_size']
+cat_cols = ['sex', 'embarked', 'pclass']
+
+preprocessor = ColumnTransformer([
+    ('num', Pipeline([('imp', SimpleImputer(strategy='median')),
+                      ('scl', StandardScaler())]), num_cols),
+    ('cat', Pipeline([('imp', SimpleImputer(strategy='most_frequent')),
+                      ('enc', OneHotEncoder(handle_unknown='ignore', sparse_output=False))]), cat_cols),
+])
+```
+
 ## 本編
 
 ### セクション1：分類モデルの比較
@@ -25,17 +61,23 @@
 ### セクション2：評価指標の選択
 
 ```python
-import pandas as pd
-import numpy as np
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import (
     confusion_matrix, classification_report,
-    roc_auc_score, roc_curve, precision_recall_curve
+    roc_auc_score, roc_curve
 )
 import matplotlib
 matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
 
-RANDOM_STATE = 42
+# モデル学習
+pipe = Pipeline([
+    ('prep',  preprocessor),
+    ('model', GradientBoostingClassifier(random_state=RANDOM_STATE)),
+])
+pipe.fit(X_train, y_train)
+y_pred = pipe.predict(X_test)
+y_prob = pipe.predict_proba(X_test)
 
 # 混同行列
 cm = confusion_matrix(y_test, y_pred)
@@ -69,15 +111,11 @@ plt.show()
 ### セクション3：クラス不均衡への対処
 
 ```python
-from sklearn.utils.class_weight import compute_class_weight
 from sklearn.ensemble import RandomForestClassifier
 
-# クラス重み自動設定
-weights = compute_class_weight('balanced', classes=np.unique(y_train), y=y_train)
-class_weight_dict = dict(enumerate(weights))
-
+# 'balanced' を渡すだけで、クラス頻度の逆数で自動的に重み付けされる
 model = RandomForestClassifier(
-    class_weight=class_weight_dict,
+    class_weight='balanced',
     random_state=RANDOM_STATE
 )
 ```

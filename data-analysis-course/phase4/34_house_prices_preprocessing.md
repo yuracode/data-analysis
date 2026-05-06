@@ -74,28 +74,34 @@ for df in [train, test]:
 
 ### セクション3：エンコーディングと最終整備
 
+> ⚠️ コマ29で学んだ通り「testデータの統計量を学習側に流入させない」のが原則。  
+> 全データを連結してから fit するとリークが発生するため、ここでは `OrdinalEncoder` の  
+> `handle_unknown='use_encoded_value'` を train だけで fit し、test に transform で適用する。
+
 ```python
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder
+
+# 特徴量・目的変数の整理
+y_train = train['LogSalePrice']
+X_train = train.drop(columns=['Id', 'SalePrice', 'LogSalePrice'])
+X_test  = test.drop(columns=['Id'])
 
 # カテゴリ変数の確認
-cat_cols = train.select_dtypes(include='object').columns.tolist()
+cat_cols = X_train.select_dtypes(include='object').columns.tolist()
+num_cols = [c for c in X_train.columns if c not in cat_cols]
 
-# 全データを合わせてLabelEncoder
-all_data = pd.concat([train.drop(['SalePrice','LogSalePrice'], axis=1), test])
+# OrdinalEncoder：trainだけでfit → testに適用（リーク防止）
+encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
+X_train[cat_cols] = encoder.fit_transform(X_train[cat_cols].astype(str))
+X_test[cat_cols]  = encoder.transform(X_test[cat_cols].astype(str))
 
-for col in cat_cols:
-    le = LabelEncoder()
-    all_data[col] = le.fit_transform(all_data[col].astype(str))
+# test に残った数値欠損を train の中央値で補完
+for c in num_cols:
+    if X_test[c].isnull().any():
+        X_test[c] = X_test[c].fillna(X_train[c].median())
 
-# 分割
-n_train = len(train)
-train_enc = all_data[:n_train]
-test_enc  = all_data[n_train:]
-
-feature_cols = [c for c in train_enc.columns if c not in ['Id']]
-X_train = train_enc[feature_cols]
-y_train = train['LogSalePrice']
-X_test  = test_enc[feature_cols]
+print(f"X_train: {X_train.shape}, 残欠損={X_train.isnull().sum().sum()}")
+print(f"X_test:  {X_test.shape}, 残欠損={X_test.isnull().sum().sum()}")
 ```
 
 ## 今日のKaggle作業

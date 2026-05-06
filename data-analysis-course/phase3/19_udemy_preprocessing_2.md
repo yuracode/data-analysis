@@ -8,35 +8,52 @@
 ## 前回の振り返り
 - 欠損値補完・スケーリング・Pipeline による一貫適用を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic')[
+    ['survived','pclass','sex','age','fare','embarked','class','deck']
+].copy()
+
+X = df.drop(columns='survived')
+y = df['survived']
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
+```
+
 ## 本編
 
 ### セクション1：カテゴリ変数のエンコーディング
 
 ```python
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import OrdinalEncoder, LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
-import category_encoders as ce  # pip install category-encoders
-
-RANDOM_STATE = 42
+import category_encoders as ce  # pip install category_encoders
 
 # 1. One-Hot Encoding（カーディナリティが低い場合）
 ohe = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
-ohe.fit_transform(df[['color']])
+sex_encoded = ohe.fit_transform(X_train[['sex']])
+print(sex_encoded[:5])
 
 # pandas でも可
-pd.get_dummies(df['color'], prefix='color')
+pd.get_dummies(X_train['sex'], prefix='sex').head()
 
 # 2. Ordinal Encoding（順序に意味がある場合）
-order = ['low', 'mid', 'high']
-df['rank_enc'] = df['rank'].map({v: i for i, v in enumerate(order)})
+order = ['Third', 'Second', 'First']
+X_train['class_ord'] = X_train['class'].map({v: i for i, v in enumerate(order)})
 
 # 3. Target Encoding（カーディナリティが高い場合）
-te = ce.TargetEncoder(cols=['city'])
-te.fit(X_train, y_train)
-X_train_enc = te.transform(X_train)
-X_test_enc  = te.transform(X_test)
+te = ce.TargetEncoder(cols=['embarked'])
+te.fit(X_train[['embarked']], y_train)
+X_train_te = te.transform(X_train[['embarked']])
+X_test_te  = te.transform(X_test[['embarked']])
 # ※ trainだけでfitすること（データリーク防止）
 ```
 
@@ -49,39 +66,46 @@ X_test_enc  = te.transform(X_test)
 ### セクション2：特徴量エンジニアリング
 
 ```python
-# 日付から特徴量を生成
-df['date'] = pd.to_datetime(df['date'])
-df['year']      = df['date'].dt.year
-df['month']     = df['date'].dt.month
-df['dayofweek'] = df['date'].dt.dayofweek
-df['is_weekend'] = (df['dayofweek'] >= 5).astype(int)
+# 日付から特徴量を生成（titanic に日付がないためサンプル生成で動作確認）
+sample = pd.DataFrame({
+    'date': pd.to_datetime(['2024-01-15', '2024-04-03', '2024-08-21'])
+})
+sample['year']       = sample['date'].dt.year
+sample['month']      = sample['date'].dt.month
+sample['dayofweek']  = sample['date'].dt.dayofweek
+sample['is_weekend'] = (sample['dayofweek'] >= 5).astype(int)
+print(sample)
 
-# 数値変数の交互作用
-df['age_x_fare'] = df['age'] * df['fare']
-df['age_per_pclass'] = df['age'] / df['pclass']
+# 数値変数の交互作用（titanicで実演）
+X_train = X_train.copy()
+X_train['age_x_fare']     = X_train['age'] * X_train['fare']
+X_train['age_per_pclass'] = X_train['age'] / X_train['pclass']
 
 # ビニング（連続値をカテゴリ化）
-df['age_bin'] = pd.cut(df['age'], bins=[0, 18, 35, 60, 100],
-                       labels=['child', 'young', 'adult', 'senior'])
+X_train['age_bin'] = pd.cut(X_train['age'], bins=[0, 18, 35, 60, 100],
+                            labels=['child', 'young', 'adult', 'senior'])
 ```
 
 ### セクション3：特徴量選択
 
 ```python
-from sklearn.feature_selection import SelectKBest, f_classif, mutual_info_classif
-from sklearn.feature_selection import RFE
+from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
 
+# 数値カラムのみ・欠損補完して動かす
+X_num = X_train.select_dtypes(include='number').fillna(X_train.select_dtypes(include='number').median())
+
 # 統計的フィルタ
-selector = SelectKBest(score_func=f_classif, k=10)
-X_selected = selector.fit_transform(X_train, y_train)
-selected_cols = X_train.columns[selector.get_support()]
+selector = SelectKBest(score_func=f_classif, k=min(5, X_num.shape[1]))
+X_selected = selector.fit_transform(X_num, y_train)
+selected_cols = X_num.columns[selector.get_support()]
+print('選ばれた特徴量:', list(selected_cols))
 
 # 特徴量重要度（モデルベース）
 rf = RandomForestClassifier(n_estimators=100, random_state=RANDOM_STATE)
-rf.fit(X_train, y_train)
-feat_imp = pd.Series(rf.feature_importances_, index=X_train.columns)
-top_features = feat_imp.nlargest(10).index
+rf.fit(X_num, y_train)
+feat_imp = pd.Series(rf.feature_importances_, index=X_num.columns).sort_values(ascending=False)
+print(feat_imp.head(10))
 ```
 
 ## ハンズオン / 演習

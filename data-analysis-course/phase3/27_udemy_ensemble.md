@@ -29,14 +29,32 @@ Stacking（複数モデルの出力をメタモデルで統合）
 ### セクション2：LightGBMの実践
 
 ```python
-import lightgbm as lgb
-from sklearn.model_selection import StratifiedKFold
+import pandas as pd
 import numpy as np
+import seaborn as sns
+import lightgbm as lgb
 import matplotlib
 matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, StratifiedKFold
+from sklearn.metrics import roc_auc_score
 
 RANDOM_STATE = 42
+
+# データ準備
+df = sns.load_dataset('titanic').copy()
+df = df.dropna(subset=['age', 'fare', 'embarked']).reset_index(drop=True)
+df['family_size'] = df['sibsp'] + df['parch'] + 1
+df['sex_enc']     = (df['sex'] == 'female').astype(int)
+df['embarked_enc']= df['embarked'].astype('category').cat.codes
+
+feature_cols = ['pclass', 'age', 'fare', 'family_size', 'sex_enc', 'embarked_enc']
+X = df[feature_cols]
+y = df['survived']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
 
 params = {
     'objective': 'binary',
@@ -55,6 +73,10 @@ skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
 oof_preds = np.zeros(len(X_train))
 test_preds = np.zeros(len(X_test))
 
+# X_train を reset_index しておくと .iloc で安定して扱える
+X_train = X_train.reset_index(drop=True)
+y_train = y_train.reset_index(drop=True)
+
 for fold, (tr_idx, val_idx) in enumerate(skf.split(X_train, y_train)):
     X_tr, X_val = X_train.iloc[tr_idx], X_train.iloc[val_idx]
     y_tr, y_val = y_train.iloc[tr_idx], y_train.iloc[val_idx]
@@ -68,7 +90,6 @@ for fold, (tr_idx, val_idx) in enumerate(skf.split(X_train, y_train)):
     oof_preds[val_idx] = model.predict_proba(X_val)[:, 1]
     test_preds += model.predict_proba(X_test)[:, 1] / 5
 
-from sklearn.metrics import roc_auc_score
 print(f"OOF AUC: {roc_auc_score(y_train, oof_preds):.4f}")
 ```
 

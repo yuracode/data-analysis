@@ -8,20 +8,40 @@
 ## 前回の振り返り
 - 回帰モデルの評価指標（RMSE・MAE・R²）と正則化（Ridge・Lasso）を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib
+matplotlib.rcParams['font.family'] = 'IPAGothic'
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, learning_curve, StratifiedKFold
+from sklearn.ensemble import RandomForestClassifier
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic').copy()
+df['family_size'] = df['sibsp'] + df['parch'] + 1
+df = df.dropna(subset=['age', 'fare', 'embarked'])
+df['sex_enc']     = (df['sex'] == 'female').astype(int)
+df['embarked_enc']= df['embarked'].astype('category').cat.codes
+
+feature_cols = ['age', 'fare', 'family_size', 'sex_enc', 'embarked_enc', 'pclass']
+X = df[feature_cols]
+y = df['survived']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
+```
+
 ## 本編
 
 ### セクション1：過学習の診断
 
 ```python
-import numpy as np
-import matplotlib
-matplotlib.rcParams['font.family'] = 'IPAGothic'
-import matplotlib.pyplot as plt
-from sklearn.model_selection import learning_curve
-from sklearn.ensemble import RandomForestClassifier
-
-RANDOM_STATE = 42
-
 model = RandomForestClassifier(n_estimators=100, random_state=RANDOM_STATE)
 train_sizes, train_scores, val_scores = learning_curve(
     model, X_train, y_train,
@@ -54,13 +74,14 @@ plt.show()
 ### セクション2：交差検証の種類
 
 ```python
-from sklearn.model_selection import KFold, StratifiedKFold, TimeSeriesSplit
+from sklearn.model_selection import KFold, StratifiedKFold, TimeSeriesSplit, cross_val_score
 
 # 通常の K-Fold
 kf = KFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
 
 # 層化K-Fold（クラス不均衡時に有効）
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
+print('StratifiedKFold:', cross_val_score(model, X_train, y_train, cv=skf, scoring='accuracy').mean())
 
 # 時系列データ用（未来データで検証）
 tscv = TimeSeriesSplit(n_splits=5)

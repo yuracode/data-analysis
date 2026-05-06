@@ -1,4 +1,4 @@
-# [コマ8] ビジネス知識①：マーケティング・顧客分析（教科書Ch5前半）
+# [コマ8] ビジネス知識①：マーケティング・顧客分析（教科書Ch4）
 
 ## 本日の目標
 - マーケティングファネルの各段階とデータ指標を対応させられる
@@ -50,8 +50,19 @@
 import pandas as pd
 import numpy as np
 
-# サンプルデータ（実際はトランザクションデータを使用）
-# orders: customer_id, order_date, amount
+RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
+
+# サンプルデータ生成（学習用：本物のトランザクションデータの代わり）
+n_customers = 200
+n_orders    = 1500
+
+orders = pd.DataFrame({
+    'customer_id': np.random.choice(range(1, n_customers + 1), n_orders),
+    'order_date':  pd.to_datetime('2024-01-01') + pd.to_timedelta(
+                       np.random.randint(0, 365, n_orders), unit='D'),
+    'amount':      np.round(np.random.gamma(2.0, 3000, n_orders), 0),
+})
 
 snapshot_date = pd.Timestamp('2025-01-01')
 

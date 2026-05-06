@@ -6,11 +6,11 @@
 - 「相関関係」と「因果関係」の違いをデータで議論できる
 
 ## 前回の振り返り
-- SHAP・PDP・LIMEで大域的・局所的なモデル解釈を実践した
+- 「データの比較」の3軸（時系列・属性・基準値）を確認し、SHAP・PDPで予測の根拠を分解した
 
-## 本編
+## データ準備（自習用：このまま実行できます）
 
-### セクション1：回帰係数の意思決定への活用
+学生データを生成して回帰の意思決定支援を実演する。
 
 ```python
 import pandas as pd
@@ -21,8 +21,29 @@ matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
 
 RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
 
-# 例：学生の最終成績を説明する回帰モデル
+n = 300
+df = pd.DataFrame({
+    'attendance_rate':      np.clip(np.random.normal(0.85, 0.10, n), 0, 1),
+    'cert_count':           np.random.poisson(1.5, n),
+    'study_hours_per_week': np.clip(np.random.normal(10, 4, n), 0, 30),
+})
+# 真の関係を仮定して final_score を生成（学習用）
+df['final_score'] = (
+    40
+    + 50 * df['attendance_rate']
+    + 3  * df['cert_count']
+    + 1.2 * df['study_hours_per_week']
+    + np.random.normal(0, 5, n)
+).round(1)
+```
+
+## 本編
+
+### セクション1：回帰係数の意思決定への活用
+
+```python
 X = df[['attendance_rate', 'cert_count', 'study_hours_per_week']]
 y = df['final_score']
 

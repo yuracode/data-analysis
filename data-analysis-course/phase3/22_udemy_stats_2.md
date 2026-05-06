@@ -23,13 +23,15 @@ import seaborn as sns
 
 RANDOM_STATE = 42
 
+df = sns.load_dataset('titanic').dropna(subset=['age', 'fare']).copy()
+
 # ピアソン相関（線形関係・正規分布を仮定）
-r, p = stats.pearsonr(df['x'], df['y'])
-print(f"ピアソン r={r:.3f}, p={p:.4f}")
+r, p = stats.pearsonr(df['age'], df['fare'])
+print(f"ピアソン age-fare r={r:.3f}, p={p:.4f}")
 
 # スピアマン相関（順位相関・非線形でも有効・外れ値に頑健）
-rho, p = stats.spearmanr(df['x'], df['y'])
-print(f"スピアマン ρ={rho:.3f}, p={p:.4f}")
+rho, p = stats.spearmanr(df['age'], df['fare'])
+print(f"スピアマン age-fare ρ={rho:.3f}, p={p:.4f}")
 ```
 
 | 手法 | 前提 | 向いているケース |
@@ -42,8 +44,9 @@ print(f"スピアマン ρ={rho:.3f}, p={p:.4f}")
 ```python
 import statsmodels.api as sm
 
-X = df[['age', 'income', 'education_years']]
-y = df['purchase_amount']
+# titanicで「fare を pclass・age・sibsp で説明する」回帰
+X = df[['pclass', 'age', 'sibsp']]
+y = df['fare']
 
 X_with_const = sm.add_constant(X)
 model = sm.OLS(y, X_with_const).fit()
@@ -65,7 +68,6 @@ summaryの読み方：
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 # VIF（分散膨張因子）
-X_with_const = sm.add_constant(X)
 vif_data = pd.DataFrame({
     'feature': X.columns,
     'VIF': [variance_inflation_factor(X_with_const.values, i+1)

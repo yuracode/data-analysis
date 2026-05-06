@@ -8,6 +8,20 @@
 ## 前回の振り返り
 - 学習曲線・交差検証・GridSearchCVでモデル評価と過学習対策を実践した
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic').copy()
+df = df.dropna(subset=['age', 'fare', 'embarked']).reset_index(drop=True)
+```
+
 ## 本編
 
 ### セクション1：ドメイン知識からの特徴量生成
@@ -15,35 +29,38 @@
 特徴量エンジニアリングは「データの変換」より「ビジネスの理解」が本質：
 
 ```python
-import pandas as pd
-import numpy as np
+# Titanic でのドメイン知識ベースの特徴量
+df['family_size'] = df['sibsp'] + df['parch'] + 1
+df['is_alone']    = (df['family_size'] == 1).astype(int)
+df['fare_per_person'] = df['fare'] / df['family_size']
+df['has_cabin']   = df['deck'].notna().astype(int)
 
-RANDOM_STATE = 42
+# 名前タイトルの抽出はこの簡易データには無いので
+# 代わりにビン化を実装
+df['age_bin'] = pd.cut(df['age'], bins=[0,12,18,35,60,100],
+                       labels=['child','teen','young','adult','senior'])
 
-# House Prices の例
-df['TotalSF'] = df['TotalBsmtSF'] + df['1stFlrSF'] + df['2ndFlrSF']
-df['TotalBath'] = df['FullBath'] + 0.5 * df['HalfBath'] + df['BsmtFullBath'] + 0.5 * df['BsmtHalfBath']
-df['HouseAge'] = df['YrSold'] - df['YearBuilt']
-df['RemodelAge'] = df['YrSold'] - df['YearRemodAdd']
-df['IsRemodeled'] = (df['YearBuilt'] != df['YearRemodAdd']).astype(int)
+# 数値→Ordinal変換
+for col in ['sex', 'embarked', 'age_bin']:
+    df[f'{col}_enc'] = df[col].astype('category').cat.codes
 
-# 品質スコアの統合
-quality_map = {'Ex': 5, 'Gd': 4, 'TA': 3, 'Fa': 2, 'Po': 1, 'NA': 0}
-for col in ['ExterQual', 'ExterCond', 'BsmtQual', 'KitchenQual']:
-    df[f'{col}_num'] = df[col].map(quality_map).fillna(0)
+feature_cols = ['pclass', 'age', 'fare', 'family_size', 'is_alone',
+                'fare_per_person', 'has_cabin', 'sex_enc', 'embarked_enc', 'age_bin_enc']
+X = df[feature_cols]
+y = df['survived']
 
-df['OverallScore'] = df['ExterQual_num'] + df['KitchenQual_num'] + df['OverallQual']
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
 ```
 
 ### セクション2：SHAP値による解釈
 
 ```python
 import shap
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingClassifier
 
-RANDOM_STATE = 42
-
-model = GradientBoostingRegressor(random_state=RANDOM_STATE)
+model = GradientBoostingClassifier(random_state=RANDOM_STATE)
 model.fit(X_train, y_train)
 
 explainer = shap.Explainer(model, X_train)
@@ -67,17 +84,17 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 1. モデルの特徴量重要度
-feat_imp = pd.Series(model.feature_importances_, index=X_train.columns)
+feat_imp = pd.Series(model.feature_importances_, index=X_train.columns).sort_values(ascending=False)
 
 # 2. Permutation Importance（モデルに依存しない）
 from sklearn.inspection import permutation_importance
 result = permutation_importance(model, X_test, y_test, n_repeats=10, random_state=RANDOM_STATE)
-perm_imp = pd.Series(result.importances_mean, index=X_train.columns)
+perm_imp = pd.Series(result.importances_mean, index=X_train.columns).sort_values(ascending=False)
 
 # 比較
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-feat_imp.nlargest(15).sort_values().plot(kind='barh', ax=axes[0], title='モデル重要度 (Top15)')
-perm_imp.nlargest(15).sort_values().plot(kind='barh', ax=axes[1], title='Permutation重要度 (Top15)')
+feat_imp.nlargest(10).sort_values().plot(kind='barh', ax=axes[0], title='モデル重要度 (Top10)')
+perm_imp.nlargest(10).sort_values().plot(kind='barh', ax=axes[1], title='Permutation重要度 (Top10)')
 plt.tight_layout()
 plt.show()
 ```

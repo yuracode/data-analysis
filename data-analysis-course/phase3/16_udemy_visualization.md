@@ -8,6 +8,22 @@
 ## 前回の振り返り
 - 記述統計・確率分布・外れ値検出の実装を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.rcParams['font.family'] = 'IPAGothic'
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+RANDOM_STATE = 42
+
+sns.set_theme(style='whitegrid', palette='muted')
+df = sns.load_dataset('titanic')
+```
+
 ## 本編
 
 ### セクション1：グラフの選択指針
@@ -24,18 +40,6 @@
 ### セクション2：seaborn の基本パターン
 
 ```python
-import pandas as pd
-import numpy as np
-import matplotlib
-matplotlib.rcParams['font.family'] = 'IPAGothic'
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-sns.set_theme(style='whitegrid', palette='muted')
-
-# 例：Titanicデータ（or 自分のデータに読み替える）
-df = sns.load_dataset('titanic')
-
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
 # 分布

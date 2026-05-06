@@ -8,9 +8,7 @@
 ## 前回の振り返り
 - pandas の `groupby` ・`merge` ・`transform` でデータ操作の基礎を習得した
 
-## 本編
-
-### セクション1：記述統計の読み方
+## データ準備（自習用：このまま実行できます）
 
 ```python
 import pandas as pd
@@ -23,6 +21,15 @@ from scipy import stats
 
 RANDOM_STATE = 42
 
+df = sns.load_dataset('titanic')
+print(df.shape)
+```
+
+## 本編
+
+### セクション1：記述統計の読み方
+
+```python
 # describe() の読み方
 df.describe()
 # count: 欠損がないか確認
@@ -31,8 +38,8 @@ df.describe()
 # max:   外れ値の可能性
 
 # 歪度・尖度
-print(f"歪度: {df['col'].skew():.3f}")   # 0に近いほど対称
-print(f"尖度: {df['col'].kurt():.3f}")   # 3が正規分布の基準
+print(f"fare の歪度: {df['fare'].skew():.3f}")   # 0に近いほど対称
+print(f"fare の尖度: {df['fare'].kurt():.3f}")   # 3が正規分布の基準
 ```
 
 ### セクション2：確率分布の使いどころ
@@ -68,16 +75,17 @@ plt.show()
 
 ```python
 # IQR法
-Q1 = df['col'].quantile(0.25)
-Q3 = df['col'].quantile(0.75)
+Q1 = df['fare'].quantile(0.25)
+Q3 = df['fare'].quantile(0.75)
 IQR = Q3 - Q1
 lower = Q1 - 1.5 * IQR
 upper = Q3 + 1.5 * IQR
-outliers_iqr = df[(df['col'] < lower) | (df['col'] > upper)]
+outliers_iqr = df[(df['fare'] < lower) | (df['fare'] > upper)]
 
 # z-score法
-z_scores = np.abs(stats.zscore(df['col'].dropna()))
-outliers_z = df[z_scores > 3]
+fare_clean = df['fare'].dropna()
+z_scores = np.abs(stats.zscore(fare_clean))
+outliers_z = fare_clean[z_scores > 3]
 
 print(f"IQR法 外れ値数: {len(outliers_iqr)}")
 print(f"z-score法 外れ値数: {len(outliers_z)}")

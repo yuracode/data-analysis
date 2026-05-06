@@ -19,6 +19,7 @@ import matplotlib
 matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
 from scipy import stats
+from statsmodels.stats.proportion import proportions_ztest
 
 RANDOM_STATE = 42
 np.random.seed(RANDOM_STATE)
@@ -65,7 +66,7 @@ print(f"差分:                   {cvr_treatment - cvr_control:+.3f}")
 # 二群比率の検定
 count = [treatment_jobs.sum(), control_jobs.sum()]
 nobs  = [n_each, n_each]
-z, p  = stats.proportions_ztest(count, nobs)
+z, p  = proportions_ztest(count, nobs)
 print(f"p値: {p:.4f} → {'有意差あり' if p < 0.05 else '有意差なし'}")
 ```
 

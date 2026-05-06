@@ -8,33 +8,54 @@
 ## 前回の振り返り
 - EDAダッシュボードを作成し、問いに関連する変数の気づきとメモをまとめた
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic')
+
+# 数値カラムだけに絞ったDataFrame（このコマの実演用）
+num_cols = ['age', 'fare', 'pclass', 'sibsp', 'parch']
+data = df[num_cols + ['survived']].copy()
+
+X = data[num_cols]
+y = data['survived']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
+```
+
 ## 本編
 
 ### セクション1：欠損値補完の戦略
 
 ```python
-import pandas as pd
-import numpy as np
 from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.experimental import enable_iterative_imputer
+from sklearn.experimental import enable_iterative_imputer  # noqa: F401
 from sklearn.impute import IterativeImputer
 
-RANDOM_STATE = 42
-
 # 欠損の種類を確認
-df.isnull().mean().sort_values(ascending=False)
+print(X_train.isnull().mean().sort_values(ascending=False))
 
 # 1. 単純補完（mean / median / most_frequent）
 imp_median = SimpleImputer(strategy='median')
-df_filled = imp_median.fit_transform(df[['age']])
+age_filled = imp_median.fit_transform(X_train[['age']])
 
 # 2. KNN補完（近傍の値を使う）
 imp_knn = KNNImputer(n_neighbors=5)
-df_filled_knn = imp_knn.fit_transform(df[['age', 'fare']])
+filled_knn = imp_knn.fit_transform(X_train[['age', 'fare']])
 
 # 3. MICE（反復補完）：最も精度が高いが計算コスト大
 imp_iter = IterativeImputer(random_state=RANDOM_STATE)
-df_filled_iter = imp_iter.fit_transform(df[num_cols])
+filled_iter = imp_iter.fit_transform(X_train)
+print(f"MICE後の欠損数: {np.isnan(filled_iter).sum()}")
 ```
 
 | 手法 | 向いているケース | 注意点 |
@@ -76,11 +97,11 @@ from sklearn.linear_model import LogisticRegression
 pipe = Pipeline([
     ('imputer', SimpleImputer(strategy='median')),
     ('scaler',  StandardScaler()),
-    ('model',   LogisticRegression()),
+    ('model',   LogisticRegression(max_iter=500)),
 ])
 
 pipe.fit(X_train, y_train)
-pipe.score(X_test, y_test)
+print(f"テスト精度: {pipe.score(X_test, y_test):.3f}")
 ```
 
 Pipeline を使うとtrainとtestに同じ変換が保証される（データリークを防ぐ）。

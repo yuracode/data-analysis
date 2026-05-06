@@ -8,6 +8,24 @@
 ## 前回の振り返り
 - 目的別のグラフ選択と seaborn・matplotlib の整え方を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.rcParams['font.family'] = 'IPAGothic'
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+RANDOM_STATE = 42
+
+# titanic を target=survived として扱う
+df = sns.load_dataset('titanic')
+df = df.rename(columns={'survived': 'target'})
+print(df.shape, df['target'].value_counts(normalize=True).round(3).to_dict())
+```
+
 ## 本編
 
 ### セクション1：EDAの進め方チェックリスト
@@ -25,15 +43,6 @@
 ### セクション2：EDAテンプレートコード
 
 ```python
-import pandas as pd
-import numpy as np
-import matplotlib
-matplotlib.rcParams['font.family'] = 'IPAGothic'
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-RANDOM_STATE = 42
-
 # --- 1. 基本情報 ---
 print(df.shape)
 print(df.dtypes)

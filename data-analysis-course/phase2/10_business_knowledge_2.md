@@ -1,4 +1,4 @@
-# [コマ10] ビジネス知識②：需要予測・在庫・価格戦略（教科書Ch5後半）
+# [コマ10] ビジネス知識②：需要予測・在庫・価格戦略（教科書Ch5）
 
 ## 本日の目標
 - 需要予測の基本的なアプローチと使うデータを説明できる
@@ -30,8 +30,16 @@ import matplotlib
 matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
 
-# 移動平均の例
-# sales: 日付インデックス付きSeriesを想定
+RANDOM_STATE = 42
+np.random.seed(RANDOM_STATE)
+
+# サンプルデータ生成：1年分の日次売上
+dates  = pd.date_range('2024-01-01', periods=365, freq='D')
+trend  = np.linspace(100, 130, 365)
+season = 20 * np.sin(2 * np.pi * np.arange(365) / 365)
+noise  = np.random.normal(0, 5, 365)
+sales  = pd.Series(trend + season + noise, index=dates, name='sales')
+
 sales_ma7  = sales.rolling(window=7).mean()
 sales_ma30 = sales.rolling(window=30).mean()
 
@@ -76,7 +84,7 @@ B群（テスト）：新しい施策
 | 期間 | 十分な時間を確保する |
 
 ```python
-from scipy import stats
+from statsmodels.stats.proportion import proportions_ztest
 
 # 二群の比率の検定（例：CVR比較）
 cvr_a = 0.05  # コントロール群のCVR
@@ -86,7 +94,7 @@ n = 1000      # 各群のサンプルサイズ
 count_a = int(cvr_a * n)
 count_b = int(cvr_b * n)
 
-z_stat, p_value = stats.proportions_ztest([count_b, count_a], [n, n])
+z_stat, p_value = proportions_ztest([count_b, count_a], [n, n])
 print(f"p値: {p_value:.4f}")
 print("有意差あり" if p_value < 0.05 else "有意差なし")
 ```
@@ -108,4 +116,4 @@ print("有意差あり" if p_value < 0.05 else "有意差なし")
 - A/Bテストは「本当に効果があるか」を検証する標準的な方法
 
 ## 次回予告
-- コマ10の内容を使った演習：需要予測・A/Bテストを学生データで模倣する
+- コマ10の内容を使った演習：需要予測・A/Bテストをサンプルデータで模倣する

@@ -8,22 +8,40 @@
 ## 前回の振り返り
 - カテゴリ変数のエンコーディング・特徴量エンジニアリング・特徴量選択を学んだ
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+df = sns.load_dataset('titanic').copy()
+df['family_size'] = df['sibsp'] + df['parch'] + 1
+
+feature_cols = ['age', 'fare', 'family_size', 'sex', 'embarked', 'pclass']
+X = df[feature_cols]
+y = df['survived']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE, stratify=y
+)
+```
+
 ## 本編
 
 ### セクション1：ColumnTransformer で一括前処理
 
 ```python
-import pandas as pd
-import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-RANDOM_STATE = 42
-
 num_cols = ['age', 'fare', 'family_size']
-cat_cols = ['sex', 'embarked', 'title']
+cat_cols = ['sex', 'embarked', 'pclass']
 
 num_transformer = Pipeline([
     ('imputer', SimpleImputer(strategy='median')),
@@ -70,11 +88,12 @@ print("統計量:\n", X_train_df.describe().round(2))
 
 | カラム | 処理 | 理由 |
 |--------|------|------|
-| Age | 中央値補完 → StandardScaler | 欠損15%、外れ値なし |
-| Cabin | 欠損フラグ化 | 欠損77%、補完困難 |
-| Sex | One-Hot | カーディナリティ2 |
-| Embarked | 最頻値補完 → One-Hot | 欠損0.2%、カーディナリティ3 |
-| Title | Label Encoding | 順序はないがカーディナリティ中 |
+| age | 中央値補完 → StandardScaler | 欠損約20%、外れ値少 |
+| fare | 中央値補完 → StandardScaler | 外れ値あるが線形モデル用 |
+| family_size | スケーリングのみ | 派生変数 |
+| sex | One-Hot | カーディナリティ2 |
+| embarked | 最頻値補完 → One-Hot | 欠損少、カーディナリティ3 |
+| pclass | One-Hot | 順序ありだが今回はOne-Hotで扱う |
 ```
 
 ## 演習

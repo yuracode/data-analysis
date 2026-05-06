@@ -8,6 +8,32 @@
 ## 前回の振り返り
 - 分類モデルの比較・混同行列・ROC-AUCを学び、クラス不均衡への対処も確認した
 
+## データ準備（自習用：このまま実行できます）
+
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+RANDOM_STATE = 42
+
+# seaborn 同梱のdiamonds（ダイヤモンド価格）データセットを使用
+df = sns.load_dataset('diamonds')
+print(df.shape)
+
+# カテゴリ変数を簡易エンコーディング（学習用にOrdinal）
+for col in ['cut', 'color', 'clarity']:
+    df[col] = df[col].astype('category').cat.codes
+
+X = df.drop(columns='price')
+y = df['price']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=RANDOM_STATE
+)
+```
+
 ## 本編
 
 ### セクション1：回帰モデルの比較
@@ -51,17 +77,19 @@ print(f"R²:   {r2:.3f}")
 ### セクション3：Ridge・Lassoの正則化
 
 ```python
-from sklearn.linear_model import Ridge, Lasso, ElasticNet
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 import matplotlib
 matplotlib.rcParams['font.family'] = 'IPAGothic'
 import matplotlib.pyplot as plt
 
-RANDOM_STATE = 42
-
 alphas = [0.001, 0.01, 0.1, 1, 10, 100]
-ridge_scores = [cross_val_score(Ridge(alpha=a), X_train, y_train,
-                cv=5, scoring='neg_root_mean_squared_error').mean()
+ridge_scores = [cross_val_score(
+                    Pipeline([('scl', StandardScaler()), ('ridge', Ridge(alpha=a))]),
+                    X_train, y_train,
+                    cv=5, scoring='neg_root_mean_squared_error').mean()
                 for a in alphas]
 
 plt.figure(figsize=(7, 4))
