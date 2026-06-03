@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>phase3_役割マニュアル_投資委員.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+<h1>【役割マニュアル】投資委員（委員会）</h1>
+<blockquote>
+<p>あなたは今回の投資委員会の <strong>投資委員</strong> に割り当てられました。<br>
+すべての提案発表を聞き、<strong>投資カードで投資先を決める＝Go/No-Goを出す</strong>のが仕事です。<br>
+さらに、鋭い反論で穴を突く <strong>レッドチーム</strong> でもあります。<br>
+<strong>先生はガイダンスのみ。Go/No-Goを出すのは君たち委員です</strong>（先生の許可は要りません）。<br>
+全体の流れは → [[phase3_投資委員会_運営マニュアル]] / ルールの大もと：[[phase3_投資委員会_進行台本]]<br>
+※ 進行役以外は全員、自分の番は <strong>発表者</strong>（→ [[phase3_役割マニュアル_発表者]]）、それ以外は投資委員。</p>
+</blockquote>
+<hr>
+<h2>あなたの役割（一言）</h2>
+<p>あなたは<strong>お金を預かる投資家</strong>です。限られた40万円を、<strong>いちばん反論に耐えた案</strong>に投じる。<br>
+そして、各提案発表で<strong>穴を1つ突く</strong>。甘く配ってはいけません。</p>
+<hr>
+<h2>ゴール（これができれば成功）</h2>
+<ul>
+<li>40万円（投資カード8枚）を<strong>確信を持って配分</strong>する。</li>
+<li>各提案発表で<strong>妥当な反論を1つ</strong>出す（カード提出は必須）。</li>
+</ul>
+<hr>
+<h2>投資のルール（投資カード）</h2>
+<table>
+<thead>
+<tr>
+<th>ルール</th>
+<th>値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>持ち分</td>
+<td><strong>40万円＝投資カード（1枚5万円） × 8枚</strong></td>
+</tr>
+<tr>
+<td>自分の案へ</td>
+<td><strong>投資できない</strong></td>
+</tr>
+<tr>
+<td>1案への上限</td>
+<td><strong>4枚（20万）</strong> ← 全力買い禁止。必ず複数を比べる</td>
+</tr>
+<tr>
+<td>1案への下限</td>
+<td>0枚（弱い案は飢えさせてよい）</td>
+</tr>
+<tr>
+<td>使い切り</td>
+<td><strong>8枚すべて</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>6人なら室内に240万が出回り、6案で奪い合う。<strong>60万以上集めた案だけがGo</strong>。<br>
+つまり、均等にばらまくと誰もGoになりません。<strong>確信した案に寄せてください</strong>。</p>
+</blockquote>
+<hr>
+<h2>タイムライン（各提案発表で）</h2>
+<h3>聞きながら</h3>
+<ul>
+<li><input type="checkbox" disabled > <strong>反論カードを1枚書く</strong>（必須）。下の「定番チェック」から型を1つ選ぶ。</li>
+</ul>
+<h3>質問タイム</h3>
+<ul>
+<li><input type="checkbox" disabled > 挙手で選ばれたら質問する</li>
+</ul>
+<h3>防御のあと</h3>
+<ul>
+<li><input type="checkbox" disabled > 「この反論は成立か？」の<strong>挙手投票</strong>に参加（過半数で成立）</li>
+<li><input type="checkbox" disabled > 投資カードの<strong>仮置き</strong>をメモ（まだ確定しない）</li>
+</ul>
+<h3>すべての提案発表終了後</h3>
+<ul>
+<li><input type="checkbox" disabled > 投資カードを配分（フォーム入力）。基準は <strong>人気ではなく「資金を任せられるか」</strong>：
+<ul>
+<li>反論に耐えたか</li>
+<li>実データの裏付け（n・規模）があるか</li>
+<li>選択バイアスを自分で処理していたか</li>
+</ul></li>
+</ul>
+<hr>
+<h2>必ず誰かが出すべき「定番反論」チェック</h2>
+<p>提案発表を聞いて、これらが<strong>怪しいのに誰も突いていない</strong>なら、あなたが出してください。</p>
+<table>
+<thead>
+<tr>
+<th>型</th>
+<th>反論の言い方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>自己選択（バイアス）</strong></td>
+<td>「<code>push_opt_in</code> は自分でONにした人でしょ？<strong>低モチベ層で切っても差は残る？</strong>」</td>
+</tr>
+<tr>
+<td><strong>サンプル数</strong></td>
+<td>「その差、<strong>人数が少ないだけ</strong>で説明できるのでは？」</td>
+</tr>
+<tr>
+<td><strong>閾値の恣意性</strong></td>
+<td>「その区切り、<strong>動かしたら結論が変わらない？</strong>（感度分析は？）」</td>
+</tr>
+<tr>
+<td><strong>タイミング</strong></td>
+<td>「3ヶ月目では<strong>手遅れ</strong>という証拠は？」</td>
+</tr>
+<tr>
+<td><strong>予測 vs 説明</strong></td>
+<td>「精度は出てるけど、<strong>“誰に何を”が言えてない</strong>のでは？」</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>特に <strong>自己選択</strong> は今回いちばん刺さる穴です。見かけの差にだまされないこと。</p>
+</blockquote>
+<hr>
+<h2>得点（あなたの攻めも評価されます）</h2>
+<table>
+<thead>
+<tr>
+<th>行動</th>
+<th>点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>妥当な反論が成立（過半数票）</td>
+<td><strong>+3</strong></td>
+</tr>
+<tr>
+<td>相手を<strong>提案組み替えに追い込んだ</strong></td>
+<td><strong>+5</strong></td>
+</tr>
+<tr>
+<td>浅い／的外れな反論</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1セッションの上限</td>
+<td>+15</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>だから、本気で穴を探すほど得します。<strong>遠慮は損</strong>です。</p>
+</blockquote>
+<hr>
+<h2>やってはいけないこと（NG）</h2>
+<ul>
+<li>❌ 全案に<strong>均等配分</strong>して逃げる → 確信を示せていない</li>
+<li>❌ 仲良しだから配る → あなたは投資家。情で配らない</li>
+<li>❌ 反論カードを出さない → 提出は必須</li>
+<li>❌ 自分の案に投資する → 禁止</li>
+</ul>
+<hr>
+<h2>困ったら</h2>
+<ul>
+<li>当日の進め方・自走の流れ → [[phase3_投資委員会_運営マニュアル]]</li>
+<li>反論の型をもっと見たい → 台本「F.問の型カタログ早見表」</li>
+<li>なぜこの仕組みか → [[phase3_投資委員会_進行台本]] の「背景：設計ストーリー」</li>
+</ul>
+</body>
+</html>

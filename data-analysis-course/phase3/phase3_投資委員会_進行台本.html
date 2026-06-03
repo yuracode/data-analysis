@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>phase3_投資委員会_進行台本.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+<h1>Phase3 投資委員会：進行台本（試作版）</h1>
+<blockquote>
+<p>仮想経営者への「Go/No-Go」を、<strong>受講生による投資委員会</strong>に置き換える運用台本。<br>
+判定者（仲間）・希少な予算・順位を実在させ、モチベを立てる。<br>
+基準＝<strong>6人・1コマ90分・各自ソロで提案発表</strong>。4〜8人へのスケール式つき。<br>
+関連：[[考え中_phase3再設計]]</p>
+</blockquote>
+<hr>
+<h2>背景：ここまでの設計ストーリー（なぜ投資委員会なのか）</h2>
+<blockquote>
+<p>この台本は単独の発表会ではなく、Phase3再設計の到達点。初めて読む先生が「なぜこの形か」を追えるよう、設計の経緯を残す。</p>
+</blockquote>
+<h3>1. Phase3 を「手法を学ぶ」から「問いに答える」へ</h3>
+<ul>
+<li>元Phase3 ＝ Udemyで手法を汎用的に学ぶ補足フェーズ → <strong>キャンセル</strong>。</li>
+<li>受講者は sklearn / TF 経験者。手の動かし方は教える必要がない。</li>
+<li>代わりに、Phase2 で立てた FitLoop通し課題の<strong>「計画」を「実行」に進める</strong>フェーズへ再設計（詳細は [[考え中_phase3再設計]]）。</li>
+</ul>
+<h3>2. 提出物が示した「本当の弱点」</h3>
+<ul>
+<li>学生の提出物（澤谷・民部・Q02・分析計画書テンプレ）を見ると、出来に大きな差があった。</li>
+<li>共通する弱点は<strong>コードではなく</strong>：①決定に効く問いを立てること ②それを経営判断に翻訳すること。</li>
+<li>例：Q02 は結論文が内部矛盾、分析計画書テンプレは §5以降ほぼ空。</li>
+<li>→ だから Phase3 の2本柱を <strong>「問の型（問いの立て方）」</strong> と <strong>「経営者に見せる資料の原型」</strong> に据えた。MLに5コマ割くより、観測された弱点に当たる。</li>
+</ul>
+<h3>3. 「問の型」は答え配りにしない</h3>
+<ul>
+<li>危険：型を渡すと穴埋め問題集に戻り、「学生主導」が崩れる。</li>
+<li>回避：型は <strong>"思考のメニュー"</strong> にして、自分のデータへの割り当ては学生がやる。手法カタログの"問い"バージョン。</li>
+</ul>
+<h3>4. モチベの急所 ＝「仮想経営者」</h3>
+<ul>
+<li>「経営者にGoをもらう」を目標にしても、<strong>経営者が架空だとモチベが上がらない</strong>。</li>
+<li>真因は会社が架空なことではなく、<strong>判定者が架空で、Goが出ても何も起きない</strong>こと。</li>
+<li>→ 本物にすべきは「<strong>誰が判定するか</strong>」と「<strong>結果</strong>」。会社の設定は架空のままでよい。</li>
+</ul>
+<h3>5. 解 ＝ 受講生の投資委員会（採用した背骨）</h3>
+<ul>
+<li>経営者ペルソナを捨て、<strong>Goを出すのを仲間にする</strong>。</li>
+<li>固定の希少予算40万を奪い合い、提案発表に対して仲間が<strong>投資カードで投資</strong>。落ちる案が必ず出る。</li>
+<li>判定する目・選ばれない痛み・順位が実在になる ＝ 仮想経営者の弱点が消える。</li>
+<li>補強の動機エンジン（重ねて使える）：
+<ul>
+<li>② <strong>裏切るデータ</strong> … Phase2で公言した結論が実データで崩れる知的スリル。</li>
+<li>③ <strong>ポートフォリオ</strong> … 就活・面接で出せる1枚。Goを出す相手が将来の雇用主になる。</li>
+</ul></li>
+</ul>
+<h3>6. レベル別自走 ＝ 同じ梯子のどこまで登るか</h3>
+<ul>
+<li>救済色を避けるため、<strong>ヘルプ量でなく「価値の鎖をどこまで登ったか」</strong>で L1/L2/L3 を定義（→ 0.5節）。</li>
+<li>型カタログ ＝ L1の綱（救出）、投資委員会＋レッドチーム ＝ L3の天井。</li>
+<li>同じルーブリックで自己採点 → 他者採点の<strong>差分を埋めさせる</strong>のが自走の核。</li>
+</ul>
+<h3>7. 型カタログは攻守の二刀流</h3>
+<ul>
+<li><strong>守り</strong> ＝ 自分の問いを立てる綱。<strong>攻め</strong> ＝ 委員として他人の分析を崩す攻撃メニュー。</li>
+<li>穴を見つけた委員にも得点（<strong>レッドチーム点</strong>）。反論筋トレが評価されるから本気になる。</li>
+<li>バイアス型の攻撃を実弾にするため、合成データに選択バイアス構造を仕込む（→ C節の注）。</li>
+</ul>
+<h3>8. 15コマへの置き方（練習 → 本番）</h3>
+<p>スプリント構造（→ [[考え中_phase3再設計]]）に、ミニ委員会を差し込んで梯子を登らせる。</p>
+<pre><code>コマ14     提案エントリー（狙うセグメント宣言＋自己採点）
+コマ15-17  ミニ委員会①「現状の1枚」      ＝ 低リスクの練習
+コマ18-21  ミニ委員会②「差は本物か」      ＝ バイアス攻撃のリハーサル
+コマ22-24  実行（ML圧縮。誰に効くかの説明だけ）
+コマ25-28  最終投資委員会（予算配分・リーダーボード・Go/No-Go）</code></pre>
+<blockquote>
+<p>以降（0節〜G節）が、この最終投資委員会1回分の具体的な運用手順。</p>
+</blockquote>
+<hr>
+<h2>0. このセッションの位置づけ</h2>
+<ul>
+<li>経営者ペルソナは紙で渡さない。<strong>Goを出すのはその回の聞き手全員（＝委員会）</strong>。</li>
+<li>各自は FitLoop社の「事業部」として、同じ<strong>月40万円</strong>を奪い合う。</li>
+<li>架空なのは会社だけ。<strong>判定する目・選ばれない痛み・順位は本物</strong>にする。</li>
+<li><strong>講師はこのライブ授業には参加しない</strong>。進行も判定も学生だけで完結し、講師は後日まとめて採点する（→ 0.3）。</li>
+</ul>
+<hr>
+<h2>0.3 登場人物と役割（講師不在モデル）</h2>
+<blockquote>
+<p>この授業は <strong>講師がライブに入らない</strong>。だから「議長＝講師」を前提にせず、<br>
+議長がやっていた仕事を <strong>持ち回りの学生「進行役」＋多数決＋自動集計</strong> に分解する。<br>
+<strong>権威が要る判定をゼロにする</strong>のが設計の肝。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>役</th>
+<th>誰が</th>
+<th>何をする</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>進行役</strong></td>
+<td>学生（持ち回り・その回提案発表しない1名）</td>
+<td>台本通りに時間を進める。タイマーを押すだけ。<strong>専門判断は不要</strong></td>
+</tr>
+<tr>
+<td><strong>発表者（事業部）</strong></td>
+<td>学生</td>
+<td>自分の提案を1枚で提案発表</td>
+</tr>
+<tr>
+<td><strong>投資委員（委員会）</strong></td>
+<td>学生（聞き手全員）</td>
+<td>投資カードで投資先を決める＝<strong>Go/No-Goを出す</strong></td>
+</tr>
+<tr>
+<td><strong>講師</strong></td>
+<td>ライブには<strong>不在</strong></td>
+<td>後日、提出物（1枚・投資カード集計・反論カード・録画）から<strong>ルーブリックだけ採点</strong>（→ C-②）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>議長の仕事を権威レスに置き換える早見表</strong></p>
+<table>
+<thead>
+<tr>
+<th>元・議長の仕事</th>
+<th>講師不在での代替</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>痛い質問を選ぶ</td>
+<td>委員の<strong>挙手で2件</strong>を選ぶ（F.反論カードから）</td>
+</tr>
+<tr>
+<td>反論の成立判定（+3）</td>
+<td><strong>委員の過半数票</strong>で成立</td>
+</tr>
+<tr>
+<td>組み替え判定（+5）</td>
+<td><strong>観察事実</strong>（発表者が提案を変えたか／否か）</td>
+</tr>
+<tr>
+<td>集計・順位</td>
+<td><strong>フォーム自動集計</strong></td>
+</tr>
+<tr>
+<td>時間管理</td>
+<td>進行役＋スマホタイマー</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>0.5 レベル定義（L1 / L2 / L3）— 他の先生がそのまま判定に使える基準</h2>
+<blockquote>
+<p>この台本のB（自己採点）・C（ルーブリック）・E（採点シート）は全部この3段を前提にする。<br>
+<strong>考え方</strong>：レベルは「どれだけ手助けしたか」ではなく、<strong>学生が"価値の鎖"をどこまで自力で登ったか</strong>で測る。<br>
+だから救済色にならず、本人が自己採点できる＝自走できる。</p>
+</blockquote>
+<h3>一覧（まずここだけ読めば判定できる）</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>一言でいうと</th>
+<th>発表者としての到達物（観察できる成果物）</th>
+<th>委員としての振る舞い</th>
+<th>ルーブリック目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1（床）</strong></td>
+<td>問いを1本立て、グラフ1枚で語れる</td>
+<td><strong>堅い問い1つ＋それを支える実データのグラフ1枚</strong>。質問は1つ受けて答えられればOK</td>
+<td>型カタログから<strong>攻撃を1つ</strong>出せる</td>
+<td><strong>≈30点 /60</strong></td>
+</tr>
+<tr>
+<td><strong>L2（標準）</strong></td>
+<td>数字で go/no-go を言い、バイアスを自覚している</td>
+<td>実データの<strong>go/no-go を実数値</strong>で提示し、<strong>選択バイアスの但し書き</strong>を自分で添える</td>
+<td>自分の専門外の案にも<strong>反論を出しにいく</strong></td>
+<td><strong>≈45点 /60</strong></td>
+</tr>
+<tr>
+<td><strong>L3（天井）</strong></td>
+<td>攻撃に耐え、データに従って結論を組み替える</td>
+<td>反論gauntletを生き残り、<strong>データが結論を覆したら提案を組み替えて再度の発表</strong></td>
+<td><strong>レッドチーム</strong>として複数案を崩し、信用ポイントを稼ぐ</td>
+<td><strong>≈55点以上 /60</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>各段の見分け方（先生用の "tell"）</h3>
+<p><strong>L1 に達したサイン</strong></p>
+<ul>
+<li>「継続率を上げたい」ではなく「<strong>○○と△△に関係があるか？</strong>」の形で問いを言える。</li>
+<li>グラフが1枚あり、それが自分の問いに<strong>対応している</strong>（飾りのグラフではない）。</li>
+<li>まだ：go/no-go の数値はない／バイアスに触れていない。← これがあればL2へ。</li>
+</ul>
+<p><strong>L2 に達したサイン</strong></p>
+<ul>
+<li>「この数字が出ればGo、出なければNo-Go」の<strong>閾値を実データの数字で</strong>言える。</li>
+<li>「<code>push_opt_in</code> は自分でONにした人＝<strong>自己選択なので因果とは言えない</strong>」と、聞かれる前に自分で言う。</li>
+<li>まだ：痛い反論が来ると黙る／結論を守ろうとして固執する。← ここを越えればL3。</li>
+</ul>
+<p><strong>L3 に達したサイン</strong></p>
+<ul>
+<li>バイアス攻撃を受けても、<strong>「低モチベ層で切ると差が消えた。だから提案をこう変える」</strong>とその場で組み替えられる。</li>
+<li>委員側でも、他人の分析の穴（サンプル数・閾値の恣意性・自己選択）を<strong>的確に1〜2件突ける</strong>。</li>
+<li>「自分がPhase2で公言した結論」を、データに従って<strong>捨てる勇気</strong>を見せる。</li>
+</ul>
+<h3>運用ルール</h3>
+<ul>
+<li>レベルは<strong>固定ではない</strong>。同じ学生がコマ15ではL1、コマ21ではL2、最終回でL3を狙ってよい。</li>
+<li>学生は毎回<strong>自分で狙う段を宣言</strong>してから走る（E.自己採点シートの先頭）。</li>
+<li><strong>講師が後日</strong>、提出物から同じルーブリック（C-②）で採点し、自己採点との<strong>差分</strong>を本人に返す。点を競わせるより<strong>差分を埋めさせる</strong>のが目的。</li>
+<li>L1で全項目を満たせなくても<strong>減点ではなく"次の一手"</strong>として返す（床は誰でも立てる場所）。</li>
+</ul>
+<hr>
+<h2>A. 投資カード枚数（希少性をここで作る）</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>値</th>
+<th>狙い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>委員1人の持ち予算</td>
+<td><strong>40万円＝投資カード（1枚5万円）×8枚</strong></td>
+<td>会社予算40万と一致させる</td>
+</tr>
+<tr>
+<td>自分の案へ</td>
+<td><strong>投資不可</strong></td>
+<td>自画自賛を封じる</td>
+</tr>
+<tr>
+<td>1案への上限</td>
+<td><strong>4枚（20万）</strong></td>
+<td>"全力買い"禁止→必ず比較させる</td>
+</tr>
+<tr>
+<td>1案への下限</td>
+<td>0枚</td>
+<td>弱い案は飢えさせてよい</td>
+</tr>
+<tr>
+<td>使い切り</td>
+<td>8枚すべて</td>
+<td>棄権不可</td>
+</tr>
+<tr>
+<td>案の調達額</td>
+<td>もらった投資カード合計 ×5万</td>
+<td>リーダーボードの軸</td>
+</tr>
+<tr>
+<td><strong>Goライン</strong></td>
+<td><strong>60万円（12枚）以上</strong>で「資金がつく」</td>
+<td>未満は見送り</td>
+</tr>
+</tbody>
+</table>
+<p><strong>なぜ希少になるか</strong><br>
+6人なら室内総額＝6人×8枚×5万＝<strong>240万</strong>を6案で奪い合う。平均40万/案。<br>
+Goラインを平均の1.5倍（60万）に置くと、<strong>クリアできるのは2〜3案だけ</strong>。<br>
+上限4枚で分散が強制されるので、本気の確信がないと60万に届かない。</p>
+<p><strong>スケール式</strong>：<code>Goライン ≒ (人数×8×5万) ÷ 案数 × 1.5</code></p>
+<ul>
+<li>4人 → 室内160万/4案 → Goライン≈60万</li>
+<li>8人 → 室内320万/8案 → Goライン≈60万</li>
+<li>どの規模でも60万前後に落ちるので、<strong>Goライン＝60万で固定</strong>してよい。</li>
+</ul>
+<hr>
+<h2>B. タイムボックス（90分 / 6人）</h2>
+<table>
+<thead>
+<tr>
+<th>時刻</th>
+<th>長さ</th>
+<th>何を</th>
+<th>誰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–0:05</td>
+<td>5分</td>
+<td>オープニング・投資カード配布・ルール確認</td>
+<td>進行役</td>
+</tr>
+<tr>
+<td>0:05–0:08</td>
+<td>3分</td>
+<td>各自が<strong>今日狙う段(L1/L2/L3)を自己採点欄に記入</strong></td>
+<td>全員</td>
+</tr>
+<tr>
+<td>0:08–0:53</td>
+<td>45分</td>
+<td><strong>提案発表＆攻防：6人 ×7.5分</strong></td>
+<td>交代</td>
+</tr>
+<tr>
+<td>0:53–1:00</td>
+<td>7分</td>
+<td>投資カード黙って配分（フォーム入力）</td>
+<td>委員</td>
+</tr>
+<tr>
+<td>1:00–1:10</td>
+<td>10分</td>
+<td>開票・リーダーボード確定・Go/見送り発表</td>
+<td>進行役</td>
+</tr>
+<tr>
+<td>1:10–1:20</td>
+<td>10分</td>
+<td>総括＋レッドチーム点の確定＋次回宿題</td>
+<td>進行役</td>
+</tr>
+</tbody>
+</table>
+<h3>1人分の7.5分（マイクロタイムボックス）</h3>
+<table>
+<thead>
+<tr>
+<th>秒</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:00–3:00</td>
+<td><strong>提案発表</strong>（本番1枚を画面共有。メッセージ→根拠→go/no-go→バイアス但し書き）</td>
+</tr>
+<tr>
+<td>（並行）</td>
+<td>委員は<strong>反論カードを記入</strong>（聞きながら書き始める）</td>
+</tr>
+<tr>
+<td>3:00–4:00</td>
+<td>委員が挙手で<strong>反論を2件選び</strong>質問</td>
+</tr>
+<tr>
+<td>4:00–6:00</td>
+<td><strong>防御</strong>（バックアップ1枚をここで出してよい／その場で提案を組み替えてよい＝L3行動）</td>
+</tr>
+<tr>
+<td>6:00–7:30</td>
+<td>委員が<strong>ルーブリック採点＋投資カード仮置き</strong>をメモ</td>
+</tr>
+</tbody>
+</table>
+<h3>人数別の調整</h3>
+<table>
+<thead>
+<tr>
+<th>人数</th>
+<th>提案発表枠/人</th>
+<th>内訳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4人</td>
+<td>9分</td>
+<td>提案発表3.5 / 攻防5.5（攻防を厚く）</td>
+</tr>
+<tr>
+<td>6人</td>
+<td>7.5分</td>
+<td>標準</td>
+</tr>
+<tr>
+<td>7人</td>
+<td>6.5分</td>
+<td>提案発表2.5 / 防御1.5</td>
+</tr>
+<tr>
+<td>8人</td>
+<td>6分</td>
+<td>提案発表2.5 / 防御1.5</td>
+</tr>
+</tbody>
+</table>
+<h3>ミニ委員会（コマ15-17, 18-21）＝45分の練習版</h3>
+<p>自己採点を省き、<strong>3.5分/人</strong>（提案発表2分＋反論1件＋防御1分）で回す。<br>
+攻撃の作法とバイアス攻撃のリハーサルが目的。本番（コマ25-28）で梯子を登らせる。</p>
+<hr>
+<h2>C. 配点（3チャンネルに分ける）</h2>
+<p>人気投票一本だと"地味だが厳密な分析"が損をする。<strong>市場・質・攻め</strong>を分離する。</p>
+<table>
+<thead>
+<tr>
+<th>チャンネル</th>
+<th>何を測る</th>
+<th>Phase3成績への重み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 投資カード調達額</td>
+<td>市場（仲間）の評価＝希少な結果</td>
+<td><strong>25%</strong></td>
+</tr>
+<tr>
+<td>② ルーブリック点</td>
+<td>提案の質（L1/L2/L3 梯子）</td>
+<td><strong>50%</strong></td>
+</tr>
+<tr>
+<td>③ レッドチーム点</td>
+<td>崩す力＝反論筋トレ</td>
+<td><strong>25%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>② ルーブリック（/60点）— 事前全公開・自己採点に使う</h3>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>配点</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メインメッセージの明確さ（誰に・何を・いつ）</td>
+<td>/10</td>
+<td></td>
+</tr>
+<tr>
+<td>実データの裏付け（n・全体比pt）</td>
+<td>/10</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>選択バイアス処理</strong></td>
+<td>/10</td>
+<td><strong>無記載は0＝即撃墜</strong></td>
+</tr>
+<tr>
+<td>go/no-go の実数値</td>
+<td>/10</td>
+<td>Phase2の仮置きを置換できたか</td>
+</tr>
+<tr>
+<td>ROI 実データ再計算</td>
+<td>/10</td>
+<td></td>
+</tr>
+<tr>
+<td>反論への防御</td>
+<td>/10</td>
+<td>組み替えられたら加点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>段の目安</strong>：L1床 ≈ 30点 / L2 ≈ 45点 / L3 ≈ 55点以上。<br>
+提案発表前に自分で採点 → 委員会後の他者採点と突き合わせる。<strong>この差分を見るのが自走の核</strong>。</p>
+<h3>③ レッドチーム点（攻めの評価）</h3>
+<ul>
+<li>委員は<strong>1回の提案発表につき反論カードを最低1枚提出（必須）</strong>。委員の<strong>挙手で2枚</strong>を選んで質問する。</li>
+<li>反論が成立（＝<strong>委員の過半数が「成立」に投票</strong>）＝ <strong>+3</strong></li>
+<li>発表者がその場で<strong>提案を組み替えた（＝観察事実、判定不要）</strong> ＝ <strong>+5</strong></li>
+<li>浅い／的外れ ＝ 0</li>
+<li>提出必須なので全員が毎回の提案発表に関与。<strong>1セッション上限 +15</strong> で暴走を防ぐ。</li>
+</ul>
+<blockquote>
+<p>仕掛け：合成データに「全体ではプッシュ通知ON層の継続率が高いが、<strong>低モチベ層で切ると差が消える（選択バイアス）</strong>」構造を仕込む。<br>
+するとバイアス型の攻撃（「それ自己選択でしょ？低モチベ層でも差は残る？」）が<strong>実弾</strong>になる。</p>
+</blockquote>
+<hr>
+<h2>D. 運用ロジスティクス</h2>
+<ul>
+<li><strong>投資カード</strong>：物理チップ（5万円券8枚×人数）でも、Googleフォーム（案ごとに0–4のプルダウン×他案分／自動集計）でも可。非同期なら後者一択。</li>
+<li><strong>反論カード</strong>：付箋でも共有スプレッドシート1行でも可。議長が即読みできる形に。</li>
+<li><strong>リーダーボード</strong>：スプレッドシート1枚に「案・調達額・Go/見送り・ルーブリック点・レッドチーム点」を並べ、その場で投影。</li>
+<li><strong>プレゼンの枚数ルール</strong>：本番は<strong>1枚固定</strong>（絞る力を測る）。<strong>バックアップは1枚まで任意で、委員の反論に答えるとき"だけ"提示可</strong>（典型：バイアス検証グラフ）。先回りした準備がL3の加点につながる。本番で2枚目以降をめくるのはNG。</li>
+<li><strong>講師の後日採点用アーカイブ（必須）</strong>：講師はライブ不在なので、各提案発表の<strong>本番1枚（PDF/画像）＋出したならバックアップ1枚・投資カード集計・反論カード・（可能なら）録画</strong>を1フォルダに残す。これが講師の採点材料の<strong>すべて</strong>。残し損ねると②ルーブリック点が付けられない。</li>
+</ul>
+<h3>非同期フォールバック</h3>
+<p>集まれない場合は <strong>録画した提案発表＋予算配分フォーム＋コメントで1人1反論</strong> に置き換える。<br>
+タイムボックスは消えるが、希少な予算・順位・反論必須の力学はそのまま再現できる。</p>
+<hr>
+<h2>E. 自己採点シート（配布用・提案発表前に記入）</h2>
+<pre><code>氏名：__________   提案タイトル：__________________________
+今日狙う段（○を付ける）：  L1（床）  /  L2  /  L3（天井）
+
+── 提案発表前の自己採点（②ルーブリック）──
+メインメッセージの明確さ            ___ /10
+実データの裏付け（n・全体比pt）      ___ /10
+選択バイアス処理（無記載は0）        ___ /10
+go/no-go の実数値                   ___ /10
+ROI 実データ再計算                  ___ /10
+反論への防御（想定）                ___ /10
+                          自己合計  ___ /60   → 自己判定段：____
+
+── 委員会後（他者採点を転記）──
+他者合計  ___ /60   → 他者判定段：____
+調達額    ___ 万円  （Goライン60万：  Go / 見送り ）
+差分メモ（自己評価と何がズレたか）：
+______________________________________________________
+次回までに埋める一手：
+______________________________________________________</code></pre>
+<hr>
+<h2>F. 反論カードテンプレ（委員用・1回の提案発表1枚以上 必須）</h2>
+<pre><code>攻撃者：__________   標的の提案：__________________________
+
+使う「問の型」（1つ選ぶ）：
+ □ 比較の問い   □ 閾値の問い   □ バイアス検証
+ □ タイミング   □ 予測×説明
+
+反論（1文で言い切る）：
+______________________________________________________
+
+これが通ると相手の結論はどう揺らぐか：
+______________________________________________________
+
+委員判定：  成立＝過半数票(+3)  /  組み替えに追込み＝観察事実(+5)  /  浅い(0)</code></pre>
+<h3>「問の型」攻撃メニュー早見表（カタログ抜粋／攻守両用）</h3>
+<table>
+<thead>
+<tr>
+<th>問の型</th>
+<th>守り（自分の提案を作る）</th>
+<th>攻め（委員として崩す）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>比較の問い</td>
+<td>2群の差を示す</td>
+<td>「その差、サンプル数で説明できるのでは？」</td>
+</tr>
+<tr>
+<td>閾値の問い</td>
+<td>層の切り方を正当化</td>
+<td>「閾値を動かすと結論変わらない？（感度分析した？）」</td>
+</tr>
+<tr>
+<td>バイアス検証</td>
+<td>自己選択を但し書き</td>
+<td>「それ自己選択でしょ？低モチベ層で切っても差は残る？」</td>
+</tr>
+<tr>
+<td>タイミング</td>
+<td>介入時期の根拠</td>
+<td>「3ヶ月目では手遅れの証拠は？」</td>
+</tr>
+<tr>
+<td>予測×説明</td>
+<td>誰に効くかをモデルに語らせる</td>
+<td>「精度は出てるが"誰に何を"が言えてないのでは？」</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>G. 一言まとめ</h2>
+<blockquote>
+<p>「経営者にGo」を「<strong>仲間の委員会で予算を勝ち取る</strong>」に変える。<br>
+型カタログは守り（自分の問い）と攻め（他人を崩す）の二刀流。<br>
+自己採点と他者採点の差分が、レベル別の自走を回す。</p>
+</blockquote>
+</body>
+</html>

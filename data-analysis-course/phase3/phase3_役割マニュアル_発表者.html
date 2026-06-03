@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>phase3_役割マニュアル_発表者.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+<h1>【役割マニュアル】発表者（事業部）</h1>
+<blockquote>
+<p>あなたは今回の投資委員会の <strong>発表者（事業部）</strong> に割り当てられました。<br>
+自分の提案を <strong>1枚</strong> でプレゼンし、仲間（投資委員）から<strong>投資カードを勝ち取る</strong>のが仕事です。<br>
+<strong>先生はガイダンスのみで判定しません。</strong>Goを出すのは仲間の委員会です。<br>
+全体の流れは → [[phase3_投資委員会_運営マニュアル]] / ルールの大もと：[[phase3_投資委員会_進行台本]]<br>
+※ 自分の番は発表者、それ以外の番は <strong>投資委員</strong> を兼ねます（→ [[phase3_役割マニュアル_投資委員]]）。</p>
+</blockquote>
+<hr>
+<h2>あなたの役割（一言）</h2>
+<p>「月40万円の予算をください」と仲間に<strong>提案発表して資金を取りに行く</strong>。<br>
+判定するのは講師ではなく<strong>仲間の委員会</strong>。Goが出るかは、あなたの提案発表次第です。</p>
+<hr>
+<h2>ゴール（これができれば成功）</h2>
+<ul>
+<li><strong>調達額 60万円（投資カード12枚）以上</strong> → 「資金がついた＝Go」。</li>
+<li>最低でも、自分が宣言した段（<strong>L1 / L2 / L3</strong>）に到達する。</li>
+</ul>
+<blockquote>
+<p>勝ち負けは順位だけではありません。<strong>自分の段に届いたか</strong>が本当の評価軸です。</p>
+</blockquote>
+<hr>
+<h2>あなたの「1枚」に必ず入れるもの</h2>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>中身</th>
+<th>抜けると…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メインメッセージ</td>
+<td>誰に・何を・いつ（1文）</td>
+<td>何の提案か伝わらない</td>
+</tr>
+<tr>
+<td>対象セグメントの規模</td>
+<td>n＝何人・全体比何pt低い（<strong>実データ</strong>）</td>
+<td>「で、どれくらいの話？」で撃沈</td>
+</tr>
+<tr>
+<td>go/no-go の実数値</td>
+<td>この数字が出ればGo、の閾値</td>
+<td>判断材料にならない</td>
+</tr>
+<tr>
+<td><strong>選択バイアスの但し書き</strong></td>
+<td>「これは自己選択かもしれない」と自分で書く</td>
+<td><strong>即撃墜</strong>（無記載は減点0）</td>
+</tr>
+<tr>
+<td>ROI 再計算</td>
+<td>実データで出した費用対効果</td>
+<td>予算を任せる理由がない</td>
+</tr>
+</tbody>
+</table>
+<h3>枚数のルール（ここ重要）</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>枚数</th>
+<th>いつ出す</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>本番プレゼン</strong></td>
+<td><strong>1枚（固定）</strong></td>
+<td>提案発表の3分。これ1枚で勝負する</td>
+</tr>
+<tr>
+<td><strong>バックアップ</strong></td>
+<td><strong>1枚まで（任意）</strong></td>
+<td>最初は見せない。<strong>委員の反論に答えるとき"だけ"</strong>出せる</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>1枚に絞れること自体が評価対象。<strong>枚数を増やして逃げない</strong>——muddyな論理は1枚だと隠せません。</li>
+<li>バックアップは「隠し玉」。典型は<strong>バイアス検証グラフ</strong>（「低モチベ層で切ったら差が消えた」を見せる用）。</li>
+<li>想定反論を先回りした人ほど、この1枚が効きます。<strong>準備の良さがL3の加点につながる</strong>。</li>
+</ul>
+<hr>
+<h2>タイムライン</h2>
+<h3>① 提案発表前（準備）</h3>
+<ul>
+<li><input type="checkbox" disabled > 上の5要素で<strong>本番の1枚</strong>を作る</li>
+<li><input type="checkbox" disabled > 必要なら<strong>バックアップ1枚</strong>を仕込む（出すのは反論されたときだけ）</li>
+<li><input type="checkbox" disabled > 自分で<strong>ルーブリック採点（/60）</strong>して、狙う段を宣言（自己採点シート）</li>
+<li><input type="checkbox" disabled > <strong>想定反論を自分で3つ潰しておく</strong> → 特にこの3つは必ず来ます：
+<ul>
+<li>「その差、<strong>サンプル数</strong>で説明できるのでは？」</li>
+<li>「<code>push_opt_in</code> は<strong>自己選択</strong>でしょ？因果じゃない」</li>
+<li>「<strong>閾値</strong>を動かしたら結論変わらない？（感度分析した？）」</li>
+</ul></li>
+</ul>
+<h3>② 提案発表本番（3分）</h3>
+<p>時間配分の目安：</p>
+<pre><code>0:00–0:30  メインメッセージ（結論から）
+0:30–1:45  根拠（実データのグラフ）
+1:45–2:30  go/no-go の数値
+2:30–3:00  選択バイアスの但し書き ＋ ROI</code></pre>
+<h3>③ 防御（2分）</h3>
+<ul>
+<li>反論が来たら、<strong>データに戻って</strong>答える。ここで初めて<strong>バックアップ1枚</strong>を出してよい。</li>
+<li>崩されたら見栄を張らない。<strong>その場で提案を組み替える</strong>のが正解（＝L3、加点対象）。
+<ul>
+<li>例：「ご指摘どおり低モチベ層では差が消えました（このグラフ）。なので対象を◯◯に絞り直します」</li>
+</ul></li>
+</ul>
+<h3>④ 提案発表後</h3>
+<ul>
+<li><input type="checkbox" disabled > 自己採点と、後日の講師採点の<strong>差分を埋める</strong>（次回までの宿題）</li>
+</ul>
+<hr>
+<h2>レベル別「今日ここまで行けば合格」</h2>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>到達点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1（床）</strong></td>
+<td>堅い問い1つ＋それを支える実データのグラフ1枚。質問に1つ答えられる</td>
+</tr>
+<tr>
+<td><strong>L2</strong></td>
+<td>go/no-go を実数値で言える＋選択バイアスを自分で但し書き</td>
+</tr>
+<tr>
+<td><strong>L3（天井）</strong></td>
+<td>反論に耐え、データが結論を覆したら<strong>その場で提案を組み替えて</strong>再提示</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>「同じ提案が L1→L2→L3 とどう育つか」の<strong>FitLoop具体例つき解説</strong>は<br>
+→ [[phase3_投資委員会_運営マニュアル]]「2. 今日狙う段とは」。走る前にここで自己採点。</p>
+</blockquote>
+<hr>
+<h2>やってはいけないこと（NG）</h2>
+<ul>
+<li>❌ <strong>選択バイアスの但し書きを省く</strong> → 一発で撃墜されます</li>
+<li>❌ 反論に固執して提案を変えない → 組み替えこそ加点</li>
+<li>❌ 問いに対応していない「飾りのグラフ」を貼る</li>
+<li>❌ go/no-go を仮の数字のままにする → <strong>実データの数値</strong>に更新</li>
+<li>❌ <strong>本番で2枚目以降をめくる</strong> → 本番は1枚。2枚目は反論されてから</li>
+</ul>
+<hr>
+<h2>困ったら</h2>
+<ul>
+<li>当日の進め方・自走の流れ → [[phase3_投資委員会_運営マニュアル]]</li>
+<li>問いの立て方／反論の型 → 台本「F.問の型カタログ早見表」</li>
+<li>全体の設計思想・15コマの流れ → [[考え中_phase3再設計]]</li>
+</ul>
+</body>
+</html>
